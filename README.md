@@ -69,9 +69,6 @@ Then, you can run the app on:
 - Web browser by pressing `w`
 - Physical device by scanning the QR code with the Expo Go app
 
-## License
-
-[MIT](LICENSE)
 
 ## Acknowledgements
 
