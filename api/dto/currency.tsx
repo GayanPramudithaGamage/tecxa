@@ -11,7 +11,7 @@ export interface OpenExchangeRatesResponse {
   export interface CurrencyRatesDTO {
     base: string;
     timestamp: number;
-    lastUpdated: string; // Human-readable date
+    lastUpdated: string; 
     rates: {
       [currencyCode: string]: number;
     };

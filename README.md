@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# Currency Converter Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native currency converter application that uses the Open Exchange Rates API.
 
-## Get started
+## Overview
 
-1. Install dependencies
+This mobile application allows users to convert between different currencies using real-time exchange rates from the Open Exchange Rates API. Built with React Native and Expo, the app provides a simple and intuitive interface for currency conversion.
 
+## Features
+
+- Real-time currency conversion
+- Support for multiple currencies
+- Clean and intuitive user interface
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14 or newer)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [Yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repository-url>
+   cd tecxa
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
-2. Start the app
+3. Create an account at [Open Exchange Rates](https://openexchangerates.org/) and get your API key.
 
-   ```bash
-    npx expo start
+4. Create a `.env` file in the root directory with your API key:
+   ```
+   API_KEY=your_api_key_here
    ```
 
-In the output, you'll find options to open the app in a
+## Setting Up the Open Exchange Rates API
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. Register for a free or paid account at [Open Exchange Rates](https://openexchangerates.org/).
+2. After signing up, go to your account dashboard to get your API key.
+3. The free tier allows for:
+   - Up to 1,000 API requests per month
+   - Hourly updates of exchange rates
+   - USD as the base currency (paid plans allow for any base currency)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## API Endpoints Used
 
-## Get a fresh project
+The application primarily uses the following endpoint:
+- Latest Exchange Rates: `https://openexchangerates.org/api/latest.json?app_id=YOUR_APP_ID`
 
-When you're ready, run:
+## Running the App
+
+Start the development server:
 
 ```bash
-npm run reset-project
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Then, you can run the app on:
+- iOS simulator by pressing `i`
+- Android emulator by pressing `a`
+- Web browser by pressing `w`
+- Physical device by scanning the QR code with the Expo Go app
 
-## Learn more
+## License
 
-To learn more about developing your project with Expo, look at the following resources:
+[MIT](LICENSE)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Acknowledgements
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Open Exchange Rates](https://openexchangerates.org/) for providing the currency exchange rate data
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)

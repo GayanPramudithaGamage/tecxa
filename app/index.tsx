@@ -10,7 +10,7 @@ export default function Index() {
   const [inputValueTwo, setInputValueTwo] = useState("");
   const [selectedCurrencyOne, setSelectedCurrencyOne] = useState("USD");
   const [selectedCurrencyTwo, setSelectedCurrencyTwo] = useState("LKR");
-  
+  const [errorMessage, setErrorMessage] = useState("");
   const { 
     loading, 
     error, 
@@ -24,14 +24,27 @@ export default function Index() {
   
   
   const onPressConvert = () => {
-    if (!inputValueOne) return;
-    
-    const amount = parseFloat(inputValueOne);
-    if (isNaN(amount)) return;
-    
-    const result = convertCurrency(amount, selectedCurrencyOne, selectedCurrencyTwo);
-    setInputValueTwo(result.toFixed(2));
+    setErrorMessage(""); // Clear previous error messages
+
+  if (!inputValueOne) {
+    setErrorMessage("Please enter an amount to convert.");
+    return;
   }
+
+  const amount = parseFloat(inputValueOne);
+  if (isNaN(amount) || amount <= 0) {
+    setErrorMessage("Please enter a valid positive number.");
+    return;
+  }
+
+  if (!selectedCurrencyOne || !selectedCurrencyTwo) {
+    setErrorMessage("Please select both currencies.");
+    return;
+  }
+
+  const result = convertCurrency(amount, selectedCurrencyOne, selectedCurrencyTwo);
+  setInputValueTwo(result.toFixed(2));
+};
   
  
   const exchangeRate = getExchangeRate(selectedCurrencyOne, selectedCurrencyTwo);
@@ -42,13 +55,16 @@ export default function Index() {
       margin: 12,
       borderWidth: 1,
       padding: 10,
-      fontSize: 25,
+      fontSize: 15,
+      borderRadius: 15,
+      
     },
     title: {
       fontSize: 20,
       fontWeight: "bold",
       textAlign: "center",
-      marginTop: 50,
+      marginBottom: 20,
+      padding: 10,
     },
     loadingContainer: {
       flex: 1,
@@ -60,6 +76,9 @@ export default function Index() {
       color: 'red',
       textAlign: 'center',
       margin: 20
+    },
+    convertbtn: {
+      margin: 12,
     }
   });
   
@@ -91,7 +110,7 @@ export default function Index() {
     <SafeAreaProvider>
       <SafeAreaView>
         <View>
-          <Text style={styles.title}>Currency Converter</Text>
+          <Text style={styles.title}>CURRENCY CONVERTER</Text>
           <View>
             <TextInput 
               style={styles.inputOne}
@@ -103,8 +122,7 @@ export default function Index() {
             <Dropdown
               style={styles.inputOne}
               data={currencyData.length > 0 ? currencyData : [
-                { label: 'USD', value: 'USD' }, 
-                { label: 'LKR', value: 'LKR' }
+             
               ]}
               labelField="label"
               valueField="value"
@@ -114,15 +132,10 @@ export default function Index() {
                 setSelectedCurrencyOne(item.value);
               }}
             />
-            <Button onPress={onPressConvert} title="Convert"/>
-            
-            {/* <TextInput 
-              style={styles.inputOne}
-              placeholder="Result" 
-              value={inputValueTwo}
-              editable={false}
-              onChangeText={(text) => setInputValueTwo(text)}
-            /> */}
+            <View style={styles.convertbtn}>
+              <Button onPress={onPressConvert} title="Convert" />
+            </View>
+        
             <Dropdown
               style={styles.inputOne}
               data={currencyData.length > 0 ? currencyData : [
@@ -137,8 +150,11 @@ export default function Index() {
                 setSelectedCurrencyTwo(item.value);
               }}
             />
+             {errorMessage ? (
+    <Text style={styles.errorText}>{errorMessage}</Text>
+  ) : null}
           </View>
-          <Text style={styles.title}>1 {selectedCurrencyOne} = {exchangeRate.toFixed(2)} {selectedCurrencyTwo}</Text>
+          <Text style={styles.title}>{inputValueOne} {selectedCurrencyOne} = {inputValueTwo} {selectedCurrencyTwo}</Text>
         </View>
       </SafeAreaView>
     </SafeAreaProvider>

@@ -1,6 +1,7 @@
 import { OpenExchangeRatesResponse, transformToDTO, CurrencyRatesDTO } from './dto/currency';
 
-const API_KEY = '48c134dd636e4041ae5187971af30825';
+
+const API_KEY =  process.env.EXPO_PUBLIC_OPEN_EXCHANGE_RATES_API_KEY;
 const BASE_URL = 'https://openexchangerates.org/api/'
 
 export const fetchLatestRates = async (): Promise<CurrencyRatesDTO> => {
@@ -12,7 +13,7 @@ export const fetchLatestRates = async (): Promise<CurrencyRatesDTO> => {
     }
     
     const data: OpenExchangeRatesResponse = await response.json();
-    // Transform the raw API response to our DTO format
+
     return transformToDTO(data);
   } catch (error) {
     console.error('Error fetching latest rates:', error);
